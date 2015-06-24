@@ -1,5 +1,6 @@
 class StoriesController < ApplicationController
   before_action :find_story, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @stories = Story.all.order("created_at DESC")
@@ -9,11 +10,11 @@ class StoriesController < ApplicationController
   end
 
   def new
-    @story = Story.new
+    @story = current_user.stories.build
   end
 
   def create
-    @story = Story.new(story_params)
+    @story = current_user.stories.build(story_params)
 
     if @story.save
       redirect_to @story, notice: "Successfully Created New Story"
