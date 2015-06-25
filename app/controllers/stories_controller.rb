@@ -7,6 +7,7 @@ class StoriesController < ApplicationController
   end
 
   def show
+    @comments = Comment.where(story_id: @story)
   end
 
   def new

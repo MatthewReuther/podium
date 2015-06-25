@@ -4,6 +4,15 @@
 %p= @story.description
 %p= @story.user.name
 
+#comment
+  %h2.comment_count= pluralize(@story.comments.count, "Comment")
+  - @comments.each do |comment|
+    .comment
+      %p.username= comment.user.name
+      %p.content= comment.content
+
+  = render 'comments/form'
+
 
 = link_to "Back", root_path
 = link_to "Edit", edit_story_path
