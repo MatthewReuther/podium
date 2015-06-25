@@ -3,6 +3,17 @@
 %p= @story.link
 %p= @story.description
 %p= @story.user.name
+%p
+  = @story.get_upvotes.size
+  Likes
+%p
+  = @story.get_downvotes.size
+  Dislikes
+
+= link_to "Like", like_story_path(@story), method: :get
+= link_to "Dislike", dislike_story_path(@story), method: :get
+
+
 
 #comment
   %h2.comment_count= pluralize(@story.comments.count, "Comment")

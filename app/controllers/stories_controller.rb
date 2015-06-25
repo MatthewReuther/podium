@@ -1,5 +1,5 @@
 class StoriesController < ApplicationController
-  before_action :find_story, only: [:show, :edit, :update, :destroy]
+  before_action :find_story, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -40,6 +40,15 @@ class StoriesController < ApplicationController
       redirect_to root_path
   end
 
+  def upvote
+    @story.upvote_by current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @story.downvote_by current_user
+    redirect_to :back
+  end
 
   private
 

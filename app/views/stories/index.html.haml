@@ -4,6 +4,12 @@
   %p
     = story.comments.count
     Comments
+  %p
+    = story.get_likes.size
+    Likes
+  %p
+    = story.get_dislikes.size
+    Dislikes
 
 = link_to "New Story", new_story_path
 
