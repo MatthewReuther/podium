@@ -1,15 +1,37 @@
-- @stories.each do |story|
-  = link_to (image_tag story.image.url(:small)), story
-  %h2= link_to story.title, story
-  %p
-    = story.comments.count
-    Comments
-  %p
-    = story.get_likes.size
-    Likes
-  %p
-    = story.get_dislikes.size
-    Dislikes
+- if user_signed_in?
+  %p#intro
+    Hello,
+    = current_user.name
+    %br/
+    %span
+      Share and discuss your views on the Top News Stories around the world, with others.
+- else
+  %p#intro
+    What's your Stance?
+    %br/
+    %span
+      Share and discuss your views on the Top News Stories around the world, with others.
 
-= link_to "New Story", new_story_path
+.container
+  .row
+    .col-lg-12
+      %h1.page-header
+        Top Stories
 
+  .row.text-center
+    - @stories.each do |story|
+      .col-md-3.col-sm-6.hero-feature
+        .thumbnail
+          %img= link_to (image_tag story.image.url(:small)), story, class: "img-responsive"
+          .caption
+            .title
+              %h2= link_to story.title, story
+          %p.buttons
+            %span
+              %i.fa.fa-comments-o
+            = story.comments.count
+            %span
+              %i.fa.fa-thumbs-o-up
+              = story.get_likes.size
+          %p
+            %a.btn.btn-primary{:href => "#"} Discuss
