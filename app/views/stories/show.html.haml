@@ -1,30 +1,38 @@
-= image_tag @story.image.url(:medium)
-%h1= @story.title
-%p= @story.link
-%p= @story.description
-%p= @story.user.name
-%p
-  = @story.get_upvotes.size
-  Likes
-%p
-  = @story.get_downvotes.size
-  Dislikes
+.container
+  .row
+    .col-md-9
+      .thumbnail
+        = image_tag @story.image.url(:medium)
+        .caption-full
+          %h1= @story.title
+          .story_data
+          = link_to like_story_path(@story), method: :get, class: "data" do
+            %i.fa.fa-thumbs-o-up
+            = pluralize(@story.get_upvotes.size, "Like")
+          = link_to dislike_story_path(@story), method: :get, class: "data" do
+            %i.fa.fa-thumbs-o-down
+            = pluralize(@story.get_downvotes.size, "Dislike")
+          %p.data
+            %i.fa.fa-comments-o
+            = pluralize(@story.comments.count, "Comment")
+          - if @story.user == current_user
+            = link_to "Edit", edit_story_path(@story), class: "data"
+            = link_to "Delete", story_path(@story), method: :delete, data: { confirm: "Are you sure?" }, class: "data"
+          %p
+            .description= simple_format(@story.description)
 
-= link_to "Like", like_story_path(@story), method: :get
-= link_to "Dislike", dislike_story_path(@story), method: :get
-
-
-
-#comment
-  %h2.comment_count= pluralize(@story.comments.count, "Comment")
-  - @comments.each do |comment|
-    .comment
-      %p.username= comment.user.name
-      %p.content= comment.content
-
-  = render 'comments/form'
-
-
-= link_to "Back", root_path
-= link_to "Edit", edit_story_path
-= link_to "Delete", story_path, method: :delete, data: { confirm: "Are you sure?"}
+    .col-md-3
+      .text-right
+        %h2.comment_count= pluralize(@story.comments.count, "Comment")
+      .list-group
+        .well
+          .text-left
+            = render "comments/form"
+          %hr/
+          .row
+            .col-md-12
+            - @comments.each do |comment|
+              .comment
+                %p.username= comment.user.name
+                %p.content= comment.content
+                %hr/

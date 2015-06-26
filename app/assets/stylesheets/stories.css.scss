@@ -1,3 +1,36 @@
-// Place all the styles related to the Stories controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.tools {
+  width: 100%;
+}
+
+p.data {
+  float: right;
+}
+
+a.data {
+  margin: 0 10px;
+}
+
+h1 {
+  margin-bottom: 0px;
+}
+
+img {
+  width: auto;
+  max-height: 300px;
+}
+
+textarea#comment_content {
+  max-width: 100%;
+  height: 10%
+}
+
+p.content {
+  word-wrap: break-word;
+}
+div.thumbnail {
+  margin-top: 5%;
+}
+
+h2.comment_count {
+  margin-top: 14%;
+}
