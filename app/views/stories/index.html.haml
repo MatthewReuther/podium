@@ -30,8 +30,7 @@
             %span
               %i.fa.fa-comments-o
             = story.comments.count
-            %span
+            %span.likes
               %i.fa.fa-thumbs-o-up
               = story.get_likes.size
-          %p
-            %a.btn.btn-primary{:href => "#"} Discuss
+
