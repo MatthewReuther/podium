@@ -14,7 +14,7 @@
             = pluralize(@story.get_downvotes.size, "Dislike")
           %p.data
             %i.fa.fa-comments-o
-            = pluralize(@story.comments.count, "Comment")
+            = pluralize(@story.comments.count, "Comments")
           - if @story.user == current_user
             = link_to "Edit", edit_story_path(@story), class: "data"
             = link_to "Delete", story_path(@story), method: :delete, data: { confirm: "Are you sure?" }, class: "data"
